@@ -995,7 +995,7 @@ got_device_list:
 	newlist = (usbmuxd_device_info_t*)malloc(sizeof(usbmuxd_device_info_t) * (collection_count(&tmpdevs) + 1));
 	dev_cnt = 0;
 	FOREACH(usbmuxd_device_info_t *di, &tmpdevs) {
-		if (di) {
+		if (di && di->product_id != 0) { // ignore WiFi connected devices
 			memcpy(&newlist[dev_cnt], di, sizeof(usbmuxd_device_info_t));
 			free(di);
 			dev_cnt++;
